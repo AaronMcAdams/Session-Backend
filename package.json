@@ -1,0 +1,32 @@
+{
+  "name": "musicprojectbackend",
+  "version": "1.0.0",
+  "description": "Basic Backend For CS322",
+  "main": "app.js",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "connect-flash": "^0.1.1",
+    "cors": "^2.8.5",
+    "dotenv": "^6.1.0",
+    "express": "^4.16.4",
+    "express-busboy": "^7.0.0",
+    "express-validator": "^5.3.0",
+    "mongoose": "^5.3.13",
+    "morgan": "^1.9.1",
+    "source-map-support": "^0.5.9"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AaronMcAdams/MusicProjectBackend.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AaronMcAdams/MusicProjectBackend/issues"
+  },
+  "homepage": "https://github.com/AaronMcAdams/MusicProjectBackend#readme"
+}
