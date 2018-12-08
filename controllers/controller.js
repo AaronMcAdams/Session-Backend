@@ -63,18 +63,41 @@ exports.findName = (req, res) => {
     .then(user => {
         if(!user) {
             return res.status(404).send({
-                message: "No User with given uername: " + req.params.user.username
+                message: "No User with given username: " + username
             });
         }
         res.send(user);
     }).catch(err => {
         if(err.kind === 'ObjectId') {
             return res.status(404).send({
-                message: "User not found with username" + req.params.user.username
+                message: "User not found with username" + username
             });
         }
         return res.status(500).send({
-            message: "Error retrieving user with username " + req.params.user.username
+            message: "Error retrieving user with username " + username
+        });
+    });
+};
+
+// Find a single user via email
+exports.findEmail = (req, res) => {
+  const email = (req.path.split('/')[3]).toString()
+  User.find({"user.email": email})
+    .then(user => {
+        if(!user) {
+            return res.status(404).send({
+                message: "No User with given email: " + email
+            });
+        }
+        res.send(user);
+    }).catch(err => {
+        if(err.kind === 'ObjectId') {
+            return res.status(404).send({
+                message: "User not found with email" + email
+            });
+        }
+        return res.status(500).send({
+            message: "Error retrieving user with username " + email
         });
     });
 };
