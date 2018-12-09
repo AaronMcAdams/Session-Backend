@@ -109,11 +109,13 @@ exports.update = (req, res) => {
            message: "User content can not be empty"
        });
    }
+   const field = "user." + Object.entries(req.body)[0][0];
+   const value = Object.entries(req.body)[0][1];
+   let set = {};
+   set[field] = value;
 
-   // Find user and update it with the request body
-   User.findByIdAndUpdate(req.params.userId, {
-       req
-   }, {new: true})
+   // Find user and update it with the request body via id
+   User.findByIdAndUpdate(req.params.userId, {$set: set}, {new: true})
    .then(user => {
        if(!user) {
            return res.status(404).send({
@@ -131,6 +133,46 @@ exports.update = (req, res) => {
            message: "Error updating user with id " + req.params.userId
        });
    });
+};
+
+// Update via username
+exports.updateViaUsername = (req, res) => {
+  const username = (req.originalUrl.split('/')[3]).toString()
+  if(!req.body) {
+       return res.status(400).send({
+           message: "User content can not be empty"
+       });
+    }
+    const field = "user." + Object.entries(req.body)[0][0];
+    const value = Object.entries(req.body)[0][1];
+    let set = {};
+    set[field] = value;
+    User.find({"user.username": username})
+      .then(user => {
+          if(!user) {
+              return res.status(404).send({
+                  message: "No User with given username: " + username
+              });
+          }
+          User.findByIdAndUpdate(user[0]._id, {$set: set}, {new: true})
+          .then(user => {
+              if(!user) {
+                  return res.status(404).send({
+                      message: "User not found with id " + req.params.userId
+                  });
+              }
+              res.send(user);
+          }).catch(err => {
+              if(err.kind === 'ObjectId') {
+                  return res.status(404).send({
+                      message: "User not found with id " + req.params.userId
+                  });
+              }
+              return res.status(500).send({
+                  message: "Error updating user with id " + req.params.userId
+              });
+          });
+       });
 };
 
 // Delete via Id
