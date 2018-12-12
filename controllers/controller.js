@@ -76,6 +76,7 @@ exports.findName = (req, res) => {
         return res.status(500).send({
             message: "Error retrieving user with username " + username
         });
+        throw error;
     });
 };
 
