@@ -1,3 +1,3 @@
 # Session Backend
 
-NodeJS, Express and Mongoose based backend
+NodeJS, Express and Mongoose based back end
