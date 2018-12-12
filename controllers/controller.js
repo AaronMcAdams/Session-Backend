@@ -82,7 +82,7 @@ exports.findName = (req, res) => {
 
 // Find a single user via email
 exports.findEmail = (req, res) => {
-  const email = const username = req.params.email.toLowerCase()
+  const email = req.params.email.toLowerCase()
   User.find({"user.email": email})
     .then(user => {
         if(!user) {
