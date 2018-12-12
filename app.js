@@ -8,12 +8,15 @@ const app = express();
 
 // allow-cors
 app.use(cors());
-app.use(function (req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    res.header("Access-Control-Allow-Methods: POST, GET, OPTIONS, PUT, DELETE");
-    next();
-})
+app.use(function(req, res, next) {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header(
+    'Access-Control-Allow-Headers',
+    'Origin, X-Requested-With, Content-Type, Accept'
+  );
+  res.header('Access-Control-Allow-Methods: POST, GET, OPTIONS, PUT, DELETE');
+  next();
+});
 
 // handle post requests (bodyParser)
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -23,14 +26,20 @@ const dbConfig = require('./database.config.js');
 
 mongoose.Promise = global.Promise;
 
-mongoose.connect(dbConfig.database, {
-    useNewUrlParser: true
-}).then(() => {
-    console.log("Successfully connected to the database");
-}).catch(err => {
+mongoose
+  .connect(
+    dbConfig.database,
+    {
+      useNewUrlParser: true
+    }
+  )
+  .then(() => {
+    console.log('Successfully connected to the database');
+  })
+  .catch(err => {
     console.log('Could not connect to the database. Exiting now...', err);
     process.exit();
-});
+  });
 
 const port = process.env.PORT || 6666;
 
@@ -42,5 +51,5 @@ require('./routes/route.js')(app);
 
 //server start
 app.listen(port, () => {
-    console.log('Server running on port: ' + port);
+  console.log('Server running on port: ' + port);
 });
