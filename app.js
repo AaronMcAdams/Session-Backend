@@ -32,7 +32,7 @@ mongoose.connect(dbConfig.database, {
     process.exit();
 });
 
-const port = process.env.port || 6666;
+const port = process.env.PORT || 6666;
 
 //default URL message
 app.get('/', (req, res) => res.send('Session'));
