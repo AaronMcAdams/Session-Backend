@@ -1,2 +1,3 @@
-# MusicProjectBackend
-Basic Backend For CS322
+# Session Backend
+
+NodeJS, Express and Mongoose based back end
